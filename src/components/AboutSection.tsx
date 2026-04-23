@@ -13,7 +13,7 @@ const ACCORDION_DATA = [
     icon: <GraduationCap className="w-5 h-5" />,
     title: "Perkenalan & Pendidikan",
     content:
-      "Perkenalkan, saya Aidil Mubaraq Syah, lahir pada 18 Juli 2009. Saya merupakan anak sulung dari dua bersaudara yang tumbuh dengan nilai disiplin dan tanggung jawab. Saat ini saya menempuh pendidikan di MAN 1 Banda Aceh dan terus mengembangkan diri menjadi pribadi yang terarah serta siap menghadapi tantangan."
+      "Perkenalkan, saya Aidil Mubaraq Syah, lahir pada 22 September 2009. Saya merupakan anak sulung dari dua bersaudara yang tumbuh dengan nilai disiplin dan tanggung jawab. Saat ini saya menempuh pendidikan di MAN 1 Banda Aceh dan terus mengembangkan diri menjadi pribadi yang terarah serta siap menghadapi tantangan."
   },
   {
     id: 'vision',
