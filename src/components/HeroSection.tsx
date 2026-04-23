@@ -52,14 +52,11 @@ export default function HeroSection({ isDark }) {
     const animate = () => {
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
 
-      // ✅ DARK MODE = GREY
       if (isDark) {
-        gradient.addColorStop(0, '#f3f4f6');
-        gradient.addColorStop(0.5, '#e5e7eb');
-        gradient.addColorStop(1, '#d1d5db');
-      } 
-      // ✅ LIGHT MODE = NAVY
-      else {
+        gradient.addColorStop(0, '#020617');
+        gradient.addColorStop(0.5, '#0f172a');
+        gradient.addColorStop(1, '#1e293b');
+      } else {
         gradient.addColorStop(0, '#0f172a');
         gradient.addColorStop(0.5, '#1e293b');
         gradient.addColorStop(1, '#334155');
@@ -72,10 +69,7 @@ export default function HeroSection({ isDark }) {
         star.y += star.speed;
         if (star.y > canvas.height) star.y = 0;
 
-        ctx.fillStyle = isDark
-          ? 'rgba(0,0,0,0.25)'
-          : 'rgba(255,255,255,0.4)';
-
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
         ctx.fillRect(star.x, star.y, star.size, star.size);
       });
 
@@ -96,31 +90,28 @@ export default function HeroSection({ isDark }) {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden font-sans">
 
-      {/* CANVAS */}
       <canvas ref={canvasRef} className="absolute inset-0 -z-20" />
 
-      {/* OVERLAY */}
       <div className={`absolute inset-0 -z-10 ${
-        isDark ? 'bg-gray-200/30' : 'bg-slate-900/30'
+        isDark ? 'bg-black/30' : 'bg-slate-900/30'
       }`} />
 
-      {/* CURSOR GLOW */}
+      {/* Glow */}
       <div
         ref={glowRef}
-        className="pointer-events-none fixed w-80 h-80 rounded-full 
-        bg-gradient-to-br from-slate-400/20 via-blue-500/20 to-slate-700/20
-        blur-3xl -translate-x-1/2 -translate-y-1/2 z-10"
+        className={`pointer-events-none fixed w-80 h-80 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 z-10 ${
+          isDark
+            ? 'bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-indigo-500/30'
+            : 'bg-gradient-to-br from-cyan-400/30 via-blue-500/30 to-indigo-500/30'
+        }`}
       />
 
-      {/* TRAIL */}
       {trail.map((t) => (
         <motion.div
           key={t.id}
-          className={`pointer-events-none fixed w-1.5 h-1.5 rounded-full blur-[1px] z-20 ${
-            isDark ? 'bg-black/40' : 'bg-white/70'
-          }`}
+          className="pointer-events-none fixed w-1.5 h-1.5 rounded-full blur-[1px] bg-white/70 z-20"
           style={{ left: t.x, top: t.y }}
           initial={{ opacity: 1, scale: 1 }}
           animate={{ opacity: 0, scale: 2.5 }}
@@ -137,16 +128,14 @@ export default function HeroSection({ isDark }) {
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
             className="flex justify-center md:justify-end"
           >
             <div className="relative">
-              {/* NAVY GLOW */}
-              <div className={`absolute -inset-2 rounded-3xl blur-2xl opacity-70 ${
+              <div className={`absolute -inset-2 rounded-3xl blur-2xl opacity-80 ${
                 isDark
-                  ? 'bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600'
-                  : 'bg-gradient-to-r from-slate-700 via-blue-800 to-slate-900'
-              }`}></div>
+                  ? 'bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600'
+                  : 'bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600'
+              }`} />
 
               <div className="relative bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-2">
                 <img
@@ -161,39 +150,36 @@ export default function HeroSection({ isDark }) {
           {/* TEXT */}
           <div className="text-center md:text-left">
             
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-wide">
               
-              {/* TEXT UTAMA */}
-              <span className={isDark ? 'text-gray-900' : 'text-slate-100'}>
+              <span className={isDark ? 'text-white' : 'text-blue-400'}>
                 Akses Dimulai
               </span>
 
               <br />
 
-              {/* NAMA */}
               <span className={`bg-gradient-to-r ${
                 isDark
-                  ? 'from-gray-900 via-gray-700 to-gray-500'
-                  : 'from-slate-200 via-blue-300 to-slate-400'
+                  ? 'from-pink-400 via-purple-400 to-indigo-400'
+                  : 'from-cyan-300 via-blue-400 to-indigo-400 whitespace-nowrap'
               } bg-clip-text text-transparent`}>
                 Aidil Mubaraq Syah
               </span>
             </h1>
 
-            {/* PARAGRAF */}
-            <p className={`mt-6 max-w-xl text-lg font-medium ${
-              isDark ? 'text-gray-700' : 'text-slate-300'
+            {/* 🚀 PARAGRAF */}
+            <p className={`mt-6 max-w-xl text-lg leading-relaxed tracking-wide ${
+              isDark ? 'text-gray-300' : 'text-cyan-300'
             }`}>
-              Dalam setiap proyek kecil, terukir perjalanan menuju 
+              🚀 Dalam setiap proyek kecil, terukir perjalanan menuju 
               penguasaan teknologi dan masa depan digital.
             </p>
 
-            {/* BUTTON */}
             <div className="flex gap-4 mt-10 justify-center md:justify-start">
               <button
                 onClick={scrollToAbout}
                 className="px-8 py-3 rounded-full text-white font-bold 
-                bg-gradient-to-r from-slate-700 to-slate-900"
+                bg-gradient-to-r from-blue-600 to-indigo-700"
               >
                 Jelajahi
               </button>
@@ -202,8 +188,8 @@ export default function HeroSection({ isDark }) {
                 href="#"
                 className={`px-8 py-3 rounded-full font-semibold ${
                   isDark
-                    ? 'text-gray-900 bg-white/50 border border-gray-400'
-                    : 'text-white bg-white/10 border border-white/20'
+                    ? 'text-white bg-purple-600'
+                    : 'text-white bg-blue-600'
                 }`}
               >
                 Hubungi
@@ -214,15 +200,14 @@ export default function HeroSection({ isDark }) {
         </div>
       </div>
 
-      {/* SCROLL ICON */}
       <motion.button
         onClick={scrollToAbout}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 p-3 rounded-full 
-        bg-white/20 border border-white/20 backdrop-blur-md z-30"
+        bg-white/20 backdrop-blur-md z-30"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >
-        <ArrowDown className={`${isDark ? 'text-gray-700' : 'text-white'} w-6 h-6`} />
+        <ArrowDown className="text-white w-6 h-6" />
       </motion.button>
     </section>
   );
