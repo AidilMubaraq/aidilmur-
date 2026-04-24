@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Coffee, Rocket, ChevronDown, Sparkles, GraduationCap, Target } from 'lucide-react';
 
 const STATS = [
-  { icon: Coffee, value: '10000km+', label: 'Running' },
-  { icon: Rocket, value: '500+', label: 'Tinta Pulpen' },
+  { icon: Coffee, value: '8000km+', label: 'Running' },
+  { icon: Rocket, value: '1000+', label: 'Skor Try Out' },
 ];
 
 const ACCORDION_DATA = [

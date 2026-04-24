@@ -1,128 +1,191 @@
-import { motion } from 'framer-motion';
-import { Award, ExternalLink, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import useEmblaCarousel from "embla-carousel-react";
 
-const certificates = [
+type Destination = {
+  title: string;
+  image: string;
+  description: string;
+  reason: string;
+  badge: string;
+  color: string;
+};
+
+const destinations: Destination[] = [
   {
-    title: 'AWS Certified Solutions Architect',
-    issuer: 'Amazon Web Services',
-    date: '2024',
-    credentialId: 'AWS-SAA-123456',
-    image: '🏆',
-    color: 'from-orange-500/20 to-yellow-500/20',
-    link: '#',
+    title: "👑 United Kingdom",
+    image: "/uk.jpg",
+    description: "Classic London, Big Ben, and timeless streets.",
+    reason: "I love the calm vintage vibes.",
+    badge: "✨ Dream Place",
+    color: "from-yellow-300 via-orange-300 to-amber-400",
   },
   {
-    title: 'Google Professional Cloud Developer',
-    issuer: 'Google Cloud',
-    date: '2023',
-    credentialId: 'GCP-PCD-789012',
-    image: '☁️',
-    color: 'from-blue-500/20 to-cyan-500/20',
-    link: '#',
+    title: "⛰️ Switzerland",
+    image: "/alpen.jpg",
+    description: "Quiet Alps and views that feel unreal.",
+    reason: "Peace feels expensive there.",
+    badge: "📍 Must Visit",
+    color: "from-cyan-300 via-sky-300 to-blue-400",
   },
   {
-    title: 'Meta Front-End Developer',
-    issuer: 'Meta (Coursera)',
-    date: '2023',
-    credentialId: 'META-FE-345678',
-    image: '⚛️',
-    color: 'from-blue-600/20 to-indigo-500/20',
-    link: '#',
+    title: "🥢 China",
+    image: "/wall.jpg",
+    description: "Great Wall and cities full of light.",
+    reason: "Tradition and future in one place.",
+    badge: "🚀 Future Journey",
+    color: "from-red-400 via-orange-400 to-yellow-300",
   },
   {
-    title: 'MongoDB Certified Developer',
-    issuer: 'MongoDB University',
-    date: '2023',
-    credentialId: 'MDB-DEV-901234',
-    image: '🍃',
-    color: 'from-green-500/20 to-emerald-500/20',
-    link: '#',
+    title: "🕌 India",
+    image: "/mahal.jpg",
+    description: "Taj Mahal and a culture full of soul.",
+    reason: "Its history feels alive.",
+    badge: "🌍 Bucket List",
+    color: "from-pink-400 via-rose-400 to-orange-300",
   },
   {
-    title: 'Certified Kubernetes Administrator',
-    issuer: 'CNCF',
-    date: '2022',
-    credentialId: 'CKA-567890',
-    image: '⚙️',
-    color: 'from-indigo-500/20 to-purple-500/20',
-    link: '#',
+    title: "☕ Turkey",
+    image: "/balon.jpg",
+    description: "Cappadocia skies and warm golden sunsets.",
+    reason: "Golden skies hit different.",
+    badge: "✨ Dream Place",
+    color: "from-orange-300 via-amber-300 to-yellow-200",
   },
   {
-    title: 'Professional Scrum Master I',
-    issuer: 'Scrum.org',
-    date: '2022',
-    credentialId: 'PSM-I-234567',
-    image: '📋',
-    color: 'from-teal-500/20 to-cyan-500/20',
-    link: '#',
+    title: "🥐 France",
+    image: "/paris.jpg",
+    description: "Paris nights and elegant timeless charm.",
+    reason: "Luxury in the simplest moments.",
+    badge: "📍 Must Visit",
+    color: "from-purple-300 via-pink-300 to-rose-300",
   },
 ];
 
 export default function CertificatesSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "center",
+  });
+
+  const scrollPrev = useCallback(() => {
+    emblaApi?.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [emblaApi]);
+
   return (
-    <section id="certificates" className="py-20 md:py-32">
-      <div className="container mx-auto px-4">
+    <section
+      id="certificates"
+      className="relative py-20 overflow-hidden bg-gradient-to-br from-[#08111f] via-[#0b1f35] to-[#0f4c5c]"
+    >
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-400/10 to-cyan-300/10 blur-3xl"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
         >
-          <span className="text-primary font-medium mb-2 block">Kredensial</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Sertifikat &amp; Lisensi
+          <h2 className="text-3xl md:text-5xl font-bold text-cyan-100">
+            Next Stop? ✈️
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+
+          <p className="text-cyan-100/70 mt-4 text-sm md:text-base">
+            Not just places, but future memories.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {certificates.map((cert, index) => (
-            <motion.div
-              key={cert.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
-            >
-              <div className="h-full p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2">
-                <div className={`w-16 h-16 rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br ${cert.color}`}>
-                  <span className="text-3xl">{cert.image}</span>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <Award className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <h3 className="font-display text-lg font-bold group-hover:text-primary transition-colors">
-                      {cert.title}
+        {/* Carousel */}
+        <div className="relative max-w-6xl mx-auto">
+          <div ref={emblaRef} className="overflow-hidden">
+            <div className="flex gap-6">
+              {destinations.map((place, index) => (
+                <div
+                  key={index}
+                  className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.33%]"
+                >
+                  <div className="p-5 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 hover:-translate-y-3 transition-all duration-500">
+
+                    <div className="relative group">
+                      {/* Glow */}
+                      <div
+                        className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${place.color}
+                        blur-2xl opacity-40 group-hover:opacity-90
+                        scale-90 group-hover:scale-110
+                        transition duration-500`}
+                      />
+
+                      {/* Badge */}
+                      <div className="absolute top-3 right-3 z-20 px-3 py-1 rounded-full text-xs font-medium bg-black/40 backdrop-blur-md text-white border border-white/10">
+                        {place.badge}
+                      </div>
+
+                      {/* Square Image */}
+                      <div
+                        className={`relative p-[2px] rounded-3xl bg-gradient-to-r ${place.color}`}
+                      >
+                        <div className="aspect-square w-full rounded-3xl overflow-hidden bg-black">
+                          <img
+                            src={place.image}
+                            alt={place.title}
+                            className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-500"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-bold text-lg mt-4 text-white">
+                      {place.title}
                     </h3>
+
+                    {/* Description */}
+                    <p className="text-sm text-cyan-100/80 mt-2 leading-relaxed">
+                      {place.description}
+                    </p>
+
+                    {/* Why */}
+                    <p className="text-sm text-cyan-200 mt-3 italic">
+                      Why? {place.reason}
+                    </p>
                   </div>
-                  
-                  <p className="text-sm text-muted-foreground">
-                    {cert.issuer}
-                  </p>
-                  
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span>{cert.date}</span>
-                  </div>
-                  
-                  <p className="text-xs text-muted-foreground/70 font-mono">
-                    ID: {cert.credentialId}
-                  </p>
-                  
-                  <Button variant="outline" size="sm" className="rounded-full mt-2" asChild>
-                    <a href={cert.link} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-1" />
-                      Verifikasi
-                    </a>
-                  </Button>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Buttons */}
+          <Button
+            onClick={scrollPrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white backdrop-blur"
+          >
+            <ChevronLeft />
+          </Button>
+
+          <Button
+            onClick={scrollNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white backdrop-blur"
+          >
+            <ChevronRight />
+          </Button>
         </div>
       </div>
     </section>

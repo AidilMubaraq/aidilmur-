@@ -36,7 +36,7 @@ const projects = [
   {
     title: '🎲 Risk It All – Bruno Mars',
     description:
-      'KTentang berani mengambil risiko demi cinta yang benar-benar diinginkan.',
+      'Tentang berani mengambil risiko demi cinta yang benar-benar diinginkan.',
     image: '/bruno.jpg',
     color: 'from-red-500 via-orange-500 to-yellow-400',
   },
