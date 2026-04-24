@@ -1,10 +1,25 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Coffee, Rocket, ChevronDown, Sparkles, GraduationCap, Target } from 'lucide-react';
+import {
+  Dumbbell,
+  Trophy,
+  ChevronDown,
+  Sparkles,
+  GraduationCap,
+  Target
+} from 'lucide-react';
 
 const STATS = [
-  { icon: Coffee, value: '8000km+', label: 'Running' },
-  { icon: Rocket, value: '1000+', label: 'Skor Try Out' },
+  {
+    icon: Dumbbell,
+    value: '8000km+',
+    label: 'Running'
+  },
+  {
+    icon: Trophy,
+    value: '1000+',
+    label: 'Skor Try Out'
+  },
 ];
 
 const ACCORDION_DATA = [
@@ -33,7 +48,6 @@ export default function AboutSection({ isDark }) {
       className="relative py-20 md:py-32 overflow-hidden 
       bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e293b]"
     >
-
       <div className="container mx-auto px-4 relative z-10">
 
         {/* HEADER */}
@@ -60,7 +74,7 @@ export default function AboutSection({ isDark }) {
           <div className="space-y-8">
             <div className="relative group">
 
-              {/* 🔥 GLOW UTAMA (NAVY + GOLD) */}
+              {/* 🔥 GLOW UTAMA */}
               <motion.div
                 className="absolute -inset-3 rounded-2xl blur-2xl opacity-90
                 bg-gradient-to-r from-slate-800 via-slate-600 to-amber-400"
@@ -68,7 +82,7 @@ export default function AboutSection({ isDark }) {
                 transition={{ duration: 3, repeat: Infinity }}
               />
 
-              {/* ✨ GLOW LAYER 2 (GOLD SHINE TIPIS) */}
+              {/* ✨ GLOW LAYER 2 */}
               <motion.div
                 className="absolute -inset-4 rounded-2xl blur-3xl opacity-50
                 bg-amber-300"
@@ -76,7 +90,7 @@ export default function AboutSection({ isDark }) {
                 transition={{ duration: 2.5, repeat: Infinity }}
               />
 
-              {/* ✅ FRAME ASLI (JANGAN DIUBAH) */}
+              {/* FRAME FOTO */}
               <div className="relative p-[3px] rounded-2xl bg-white/10">
                 <div className="aspect-square rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm">
                   <img
